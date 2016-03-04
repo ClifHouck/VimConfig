@@ -66,6 +66,9 @@ set laststatus=2
 " Provide visual alert past 80 characters.
 set colorcolumn=80
 
+" Automatically strip whitespace from the end of a line for Python files
+autocmd BufWritePre *.py :%s/\s\+$//e
+
 " statusline
 " " cf the default statusline: %<%f\ %h%m%r%=%-14.(%l,%c%V%)\ %P
 " " format markers:
