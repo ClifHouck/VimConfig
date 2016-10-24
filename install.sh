@@ -8,8 +8,8 @@ cp .vimrc ~/.vimrc
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 vim +PluginInstall +qall
 
-# Install CMAKE, python headers for YVM
-sudo $PKG_MGR install cmake python-devel
+# Install dependencies needed for YVM
+sudo $PKG_MGR install cmake python-devel clang
 
 # Compile YCM
 pushd ~/.vim/bundle/YouCompleteMe/
