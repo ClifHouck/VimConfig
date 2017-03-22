@@ -10,8 +10,7 @@ call vundle#begin()
 " " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
 Plugin 'Valloric/YouCompleteMe'
-" Plugin 'andviro/flake8-vim'
-Plugin 'scrooloose/syntastic'
+Plugin 'w0rp/ale'
 Plugin 'scrooloose/nerdtree'
 Plugin 'mattn/webapi-vim'
 Plugin 'mattn/gist-vim'
@@ -34,9 +33,11 @@ Plugin 'mattn/gist-vim'
 "
 " " All of your Plugins must be added before the following line
 call vundle#end()            " required
-filetype plugin indent on    " required
+"filetype plugin indent on    " required
 " To ignore plugin indent changes, instead use:
-"filetype plugin on
+filetype plugin on
+
+let &runtimepath.=',~/.vim/bundle/ale'
 "
 " Brief help
 " :PluginList       - lists configured plugins
@@ -66,8 +67,12 @@ set laststatus=2
 " Provide visual alert past 80 characters.
 set colorcolumn=80
 
-" Automatically strip whitespace from the end of a line for Python files
+" Automatically strip whitespace from the end of a line for Python and
+" Restructered text files
 autocmd BufWritePre *.py :%s/\s\+$//e
+autocmd BufWritePre *.pyx :%s/\s\+$//e
+autocmd BufWritePre *.pyd :%s/\s\+$//e
+autocmd BufWritePre *.rst :%s/\s\+$//e
 
 " statusline
 " " cf the default statusline: %<%f\ %h%m%r%=%-14.(%l,%c%V%)\ %P
@@ -88,13 +93,11 @@ autocmd BufWritePre *.py :%s/\s\+$//e
 " "   %) end of width specification
 set statusline=%<\ %n:%f\ %m%r%y%=%-35.(line:\ %l\ of\ %L,\ col:\ %c%V\ (%P)%)
 
-" syntastic settings
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
+" Give us a local leader 
+let maplocalleader = '\'
+" Let us pipe python code through yapf for us.
+autocmd FileType python nnoremap <LocalLeader>= :0,$!yapf<CR>
+autocmd FileType python nnoremap <LocalLeader>s :!echo test<CR>
 
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-let g:syntastic_python_checkers = ['pyflakes', 'flake8']
+" Ale options
+let g:ale_python_pylint_options='--disable=R0201,W0212'
