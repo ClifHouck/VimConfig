@@ -6,14 +6,37 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 " " alternatively, pass a path where Vundle should install plugins
 " "call vundle#begin('~/some/path/here')
+"
+let g:go_fmt_command = "goimports"
 
 " " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
+Plugin 'ervandew/supertab'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'w0rp/ale'
 Plugin 'scrooloose/nerdtree'
 Plugin 'mattn/webapi-vim'
 Plugin 'mattn/gist-vim'
+Plugin 'fatih/vim-go'
+Plugin 'SirVer/ultisnips'
+Plugin 'honza/vim-snippets'
+
+" Make YCM compatible with Ultisnips (using supertab)
+let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+let g:SuperTabDefaultCompletionType = '<C-n>'
+let g:ycm_auto_trigger=0
+
+" Snippets Config
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<Right>"
+let g:UtliSnipsJumpBackwardTrigger="<Left>"
+let g:UltiSnipsSnippetsDir="~/.vim/bundle/vim-snippets/snippets"
+let g:UltiSnipsEditSplit="vertical"
+
+set completeopt-=preview
+
+autocmd FileType go UltiSnipsAddFiletypes go
 
 " " The following are examples of different formats supported.
 " " Keep Plugin commands between vundle#begin/end.
