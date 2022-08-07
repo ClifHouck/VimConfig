@@ -2,7 +2,7 @@
 PKG_MGR="dnf"
 
 # Install RC
-cp .vimrc ~/.vimrc
+ln -s .vimrc ~/.vimrc
 
 # Get and setup Vundle + Plugins
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
