@@ -13,13 +13,18 @@ let g:go_fmt_command = "goimports"
 Plugin 'gmarik/Vundle.vim'
 Plugin 'ervandew/supertab'
 Plugin 'Valloric/YouCompleteMe'
-Plugin 'w0rp/ale'
+Plugin 'dense-analysis/ale'
 Plugin 'scrooloose/nerdtree'
 Plugin 'mattn/webapi-vim'
 Plugin 'mattn/gist-vim'
 Plugin 'fatih/vim-go'
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
+Plugin 'editorconfig/editorconfig-vim'
+
+" Linting is too aggressive 
+let g:ale_lint_on_text_changed = 'never'
+let g:ale_lint_on_insert_leave = 0
 
 " Make YCM compatible with Ultisnips (using supertab)
 let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
@@ -36,7 +41,7 @@ let g:UltiSnipsEditSplit="vertical"
 
 set completeopt-=preview
 
-autocmd FileType go UltiSnipsAddFiletypes go
+" autocmd FileType go UltiSnipsAddFiletypes go
 
 " " The following are examples of different formats supported.
 " " Keep Plugin commands between vundle#begin/end.
@@ -74,7 +79,8 @@ let &runtimepath.=',~/.vim/bundle/ale'
 
 set nowrap
 syntax on
-colorscheme elflord
+colorscheme darkblue
+highlight visual cterm=reverse ctermbg=green
 set expandtab
 set tabstop=4
 set shiftwidth=4
@@ -118,6 +124,9 @@ set statusline=%<\ %n:%f\ %m%r%y%=%-35.(line:\ %l\ of\ %L,\ col:\ %c%V\ (%P)%)
 
 " Give us a local leader 
 let maplocalleader = '\'
+" Tiltfiles are a dialect of Python
+autocmd BufNewFile,BufRead Tiltfile set ft=python
+autocmd BufNewFile,BufRead Dockerfile* set ft=dockerfile
 " Let us pipe python code through yapf for us.
 autocmd FileType python nnoremap <LocalLeader>= :0,$!yapf<CR>
 autocmd FileType python nnoremap <LocalLeader>s :!echo test<CR>
