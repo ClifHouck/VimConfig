@@ -1,8 +1,13 @@
+#!/bin/bash
+#
 # Currently on Fedora, but I'm known to use Debian-relatives as well, so...
 PKG_MGR="dnf"
+REPO_DIR=$(pwd)
 
 # Install RC
-ln -s .vimrc ~/.vimrc
+pushd ~
+ln -s ${REPO_DIR}/.vimrc .vimrc
+popd
 
 # Get and setup Vundle + Plugins
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
