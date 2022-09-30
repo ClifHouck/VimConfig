@@ -79,7 +79,7 @@ let &runtimepath.=',~/.vim/bundle/ale'
 
 set nowrap
 syntax on
-colorscheme darkblue
+colorscheme slate
 highlight visual cterm=reverse ctermbg=green
 set expandtab
 set tabstop=4
