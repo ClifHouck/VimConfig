@@ -21,6 +21,7 @@ Plugin 'fatih/vim-go'
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
 Plugin 'editorconfig/editorconfig-vim'
+Plugin 'psf/black'
 
 " Linting is too aggressive 
 let g:ale_lint_on_text_changed = 'never'
@@ -96,11 +97,7 @@ set laststatus=2
 " Provide visual alert past 80 characters.
 set colorcolumn=80
 
-" Automatically strip whitespace from the end of a line for Python and
-" Restructered text files
-autocmd BufWritePre *.py :%s/\s\+$//e
-autocmd BufWritePre *.pyx :%s/\s\+$//e
-autocmd BufWritePre *.pyd :%s/\s\+$//e
+" Automatically strip whitespace from the end of a line for Restructered text files
 autocmd BufWritePre *.rst :%s/\s\+$//e
 
 " statusline
@@ -133,3 +130,8 @@ autocmd FileType python nnoremap <LocalLeader>s :!echo test<CR>
 
 " Ale options
 let g:ale_python_pylint_options='--disable=R0201,W0212'
+
+augroup black_on_save
+  autocmd!
+  autocmd BufWritePre *.py Black
+augroup end
