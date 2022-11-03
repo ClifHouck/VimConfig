@@ -82,6 +82,7 @@ set nowrap
 syntax on
 colorscheme slate
 highlight visual cterm=reverse ctermbg=green
+hi Matchparen ctermbg=green guibg=lightgreen
 set expandtab
 set tabstop=4
 set shiftwidth=4
